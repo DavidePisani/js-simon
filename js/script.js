@@ -6,39 +6,50 @@
 // il software dice quanti e quali dei numeri da indovinare sono stati individuati.
 
 
-alert('test')
+// richiamo la funzione per generare numeri random da 1 a 100 e 5 di loro sono in un arrey
+let numberToRemeb = randomNumGenerate(1 , 100);
+console.log(numberToRemeb)
+// mi stampo i numerida ricordare con un laetr
+alert('Questi sono i numeri da ricordare: '+numberToRemeb)
 
+// Alexa timer 30 secondi 
+setTimeout(startGame, 30000);
 
+// richiamo la funzione al termine dei 30 secondi 
+function startGame(){
+    // creo un arrei per inserire i numeri dell'utente
+    arrayUser = []
+    // per 5 volte chiedo all'utente di darmi un numero 
+    for( let i = 0; i < 5; i++){
+        let userNumber = parseInt(prompt('Indovina i 5 numeri'))
+        // se il numero inserito è incluso nell'arrey dei numeri da indovinare lo inserisco in un arrey
+        if(numberToRemeb.includes(userNumber)){
+            arrayUser.push(userNumber)
+            console.log(arrayUser)
+        }
+    }
 
+    // stampo con un alert quanti numeri sono stati indovinati e quali
+    alert(`Ne hai presi ${arrayUser.length} i numeri azzeccati sono: ${arrayUser}` )    
+}
 
+// FUNZIONI
 
-
-
-
-
-
-
-
-
-
-
-function randomBombsGenerate(numBomb, minRange, maxRange) {
-
+function randomNumGenerate( minRange, maxRange) {
     // creo arrey
-    const bombArrey = [];
-     
-    while(bombArrey.length < numBomb){
+    const numArrey = [];     
+    while(numArrey.length < 5){
         // richiamo la funzione per generare numeri 
-      let randomBombs = bombsGen(minRange, maxRange)
+      let randomNum = numGen(minRange, maxRange)
       // controlla se quel numero è stato già inserito in bombsArrey
-      if(!bombArrey.includes(randomBombs)){
-        bombArrey.push(randomBombs)
+      if(!numArrey.includes(randomNum)){
+        numArrey.push(randomNum)
       }
     }
-    return bombArrey;
+    return numArrey;
   }
 
 // funzione per generare numeri random 
-function bombsGen(min, max) {  
+function numGen(min, max) {  
  return Math.floor(Math.random() * (max - min + 1) ) + min;
  }
